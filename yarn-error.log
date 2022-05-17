@@ -1,0 +1,49 @@
+Arguments: 
+  /Users/CharlesGiovaniello/.nvm/versions/node/v16.15.0/bin/node /Users/CharlesGiovaniello/.nvm/versions/node/v16.15.0/bin/yarn add opensea-js
+
+PATH: 
+  /Users/CharlesGiovaniello/.nvm/versions/node/v16.15.0/bin:/Users/CharlesGiovaniello/.vscode-dotnet-sdk/.dotnet:/usr/local/bin:/usr/local/sbin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/MacGPG2/bin:/usr/local/share/dotnet:/opt/X11/bin:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Wireshark.app/Contents/MacOS:/Users/CharlesGiovaniello/.vscode-dotnet-sdk/.dotnet:/usr/local/sbin:/Users/CharlesGiovaniello/opt/anaconda3/condabin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/2.7/bin:/Users/CharlesGiovaniello/.dotnet/tools:/Users/CharlesGiovaniello/anaconda/bin:/Users/CharlesGiovaniello/.dotnet/tools:/Users/CharlesGiovaniello/anaconda/bin
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  16.15.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, open '/Users/CharlesGiovaniello/Library/Caches/Yarn/v6/.tmp/7ff8dac337b095c417e7d9f2c17e8731/.yarn-tarball.tgz'
+
+npm manifest: 
+  {
+    "name": "nft-floor-sweeper-2.0",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+      "start": "node src/index.js",
+      "dev": "env-cmd -f ./config/keys.env nodemon ./src/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+      "@opensea/stream-js": "^0.0.20",
+      "dotenv": "^16.0.1",
+      "env-cmd": "^10.1.0",
+      "nodemon": "^2.0.16",
+      "twitter-api-client": "^1.5.2",
+      "ws": "^8.6.0"
+    },
+    "devDependencies": {
+      "@types/phoenix": "^1.5.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

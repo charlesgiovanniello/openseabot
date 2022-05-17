@@ -1,0 +1,27 @@
+{
+  "name": "nft-floor-sweeper-2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "env-cmd -f ./config/keys.env nodemon ./src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@opensea/stream-js": "^0.0.20",
+    "cheerio": "^1.0.0-rc.10",
+    "dotenv": "^16.0.1",
+    "env-cmd": "^10.1.0",
+    "nodemon": "^2.0.16",
+    "opensea-js": "^3.0.4",
+    "puppeteer": "^14.1.0",
+    "twitter-api-client": "^1.5.2",
+    "ws": "^8.6.0"
+  },
+  "devDependencies": {
+    "@types/phoenix": "^1.5.4"
+  }
+}
