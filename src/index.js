@@ -2,7 +2,7 @@ const { OpenSeaStreamClient } = require('@opensea/stream-js')
 const WebSocket = require('ws')
 const {sendTweet} = require('./twitter')
 const {getAssetStats, getAssetCollectionData} = require('./openseaRest')
-const {rarityCalculator} = require('./rarityCalculator')
+const {getRank} = require('./rarityCalculator')
 const fs = require('fs');
 
 const log = fs.createWriteStream('./log.txt', { flags: 'a' });
@@ -19,7 +19,7 @@ let hashtags='\n#NFT #OpenSea #NFTCommunity'
 
 setInterval(()=>{
     blacklist=[]
-},86400000)
+},86400000) //24 hours
 
 setInterval(()=>{
     hashtags='\n#NFT #OpenSea #NFTCommunity'
@@ -78,29 +78,24 @@ const itemListListener =  (asset) => {
             let listPrice = convertPrice(event.payload.base_price, event.payload.payment_token.decimals)
             console.log(asset)
             let assetCollectionData = await getAssetCollectionData(asset)
-            let rarity 
-            try{
-                rarity = '💎Rarity Score (beta): '+(await rarityCalculator(event)).toFixed(2)
-            }catch(e){
-                console.log(e)
-                rarity=''
-            }
             let asset_name = assetCollectionData.name
-            let asset_twitter = '@'+assetCollectionData.twitter
-            if(asset_twitter == '@null'){asset_twitter=''}
             let symbol = event.payload.payment_token.symbol
             let link = event.payload.item.permalink
             let percentOff = parseFloat((Math.abs(weeklyAverage-listPrice) / ((weeklyAverage+listPrice) / 2) * 100).toFixed(2))
             let emojis = getEmoji(percentOff)
             //console.log(`Item from collection #${asset_name} was listed!\n\nPrice: ${parseFloat(listPrice.toFixed(3))} ${symbol}\n\nRarity Score: ${rarity}\n\nThat's ${percentOff}% below the weekly average!\n\n${emojis} ${link}`)
             let blacklisted = blacklist.includes(event.payload.item.nft_id)
-            
             if(listPrice < weeklyAverage && event.payload.listing_type==="dutch" && percentOff >= 10 && !blacklisted){
-                let tweet = `🔥 Deal from collection #${asset_name} was listed!\n\n💵Price: ${parseFloat(listPrice.toFixed(3))} ${symbol}\n\n${rarity}\n\nThat's ${percentOff}% below the weekly average!${hashtags}\n${emojis} ${link}`
+                let rank = ""
+                try{rank = (await getRank(event)).replace('#','')
+                }catch(e){console.log(e)}
+                if (rank!=""){
+                    rank = '\n\n💎'+rank + ' / ' + result.total_supply
+                }
+                let tweet = `🔥 Deal from collection #${asset_name} was listed!\n\n💵 Price: ${parseFloat(listPrice.toFixed(3))} ${symbol}${rank}\n\nThat's ${percentOff}% below the weekly average!${hashtags}\n${emojis} ${link}`
                 //sendTweet()
-                let fileString = '\n\n'+tweet+'\n*********************\n'
+                let fileString = (new Date()).toString()+'\n\n'+tweet+'\n*********************\n'
                 log.write(fileString)
-                console.log(tweet)
                 blacklist.push("nft_id")
                 hashtags=''
             }
