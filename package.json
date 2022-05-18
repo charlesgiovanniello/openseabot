@@ -10,6 +10,9 @@
     "start": "env-cmd -f ./config/keys.env node src/index.js",
     "dev": "env-cmd -f ./config/keys.env nodemon ./src/index.js"
   },
+  "overrides": {
+    "ethereumjs-abi": "https://registry.npmjs.org/ethereumjs-abi/-/ethereumjs-abi-0.6.8.tgz"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
