@@ -10,7 +10,6 @@
     "start": "node src/index.js",
     "dev": "env-cmd -f ./config/keys.env nodemon ./src/index.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -19,6 +18,7 @@
     "cheerio": "^1.0.0-rc.10",
     "dotenv": "^16.0.1",
     "env-cmd": "^10.1.0",
+    "express": "^4.18.1",
     "nodemon": "^2.0.16",
     "opensea-js": "^3.0.4",
     "puppeteer": "^14.1.0",

@@ -4,8 +4,15 @@ const {sendTweet} = require('./twitter')
 const {getAssetStats, getAssetCollectionData} = require('./openseaRest')
 const {getRank} = require('./rarityCalculator')
 const fs = require('fs');
+const express = require('express')
+const app = express()
 
 const log = fs.createWriteStream('./log.txt', { flags: 'a' });
+
+const port = process.env.PORT
+app.listen(port, ()=>{
+    console.log("Server is up on port " + port)
+} )
 
 const openseaClient = new OpenSeaStreamClient({
     token: process.env.OPENSEA_ACCESS_TOKEN,
