@@ -85,7 +85,7 @@ const itemListListener =  (asset) => {
             let emojis = getEmoji(percentOff)
             //console.log(`Item from collection #${asset_name} was listed!\n\nPrice: ${parseFloat(listPrice.toFixed(3))} ${symbol}\n\nRarity Score: ${rarity}\n\nThat's ${percentOff}% below the weekly average!\n\n${emojis} ${link}`)
             let blacklisted = blacklist.includes(event.payload.item.nft_id)
-            if(true/*listPrice < weeklyAverage && event.payload.listing_type==="dutch" && percentOff >= 10 && !blacklisted*/){
+            if(listPrice < weeklyAverage && event.payload.listing_type==="dutch" && percentOff >= 10 && !blacklisted){
                 let rank = ""
                 try{rank = (await getRank(event)).replace('#','')
                 }catch(e){console.log(e)}
