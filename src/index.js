@@ -95,7 +95,8 @@ const itemListListener =  (asset) => {
                 let tweet = `🔥 Deal from collection #${asset_name} was listed!\n\n💵 Price: ${parseFloat(listPrice.toFixed(3))} ${symbol}${rank}\n\nThat's ${percentOff}% below the weekly average!${hashtags}\n${emojis} ${link}`
                 //sendTweet()
                 let fileString = (new Date()).toString()+'\n\n'+tweet+'\n*********************\n'
-                log.write(fileString)
+                console.log(fileString)
+                //log.write(fileString)
                 blacklist.push("nft_id")
                 hashtags=''
             }
