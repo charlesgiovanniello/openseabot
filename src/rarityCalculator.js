@@ -12,6 +12,7 @@ const getRank = (async (event) => {
         args: [
             '--no-sandbox',
             '--disable-dev-shm-usage', // <-- add this one
+            '--disable-setuid-sandbox',
             ],
     })
     const page = await browser.newPage()
