@@ -6,6 +6,8 @@ const {getRank} = require('./rarityCalculator')
 const fs = require('fs');
 const express = require('express')
 const app = express()
+const {sendDiscordUpdate} = require('./discord')
+const {channelIds} = require('./collections')
 
 const log = fs.createWriteStream('./log.txt', { flags: 'a' });
 
@@ -30,43 +32,12 @@ setInterval(()=>{
 
 setInterval(()=>{
     hashtags='\n#NFT #OpenSea #NFTCommunity'
-},60000)//ten minutes
+},600000)//ten minutes
 
 //Converts list price based on payment token chain
 const convertPrice = (priceString,decimals)=>{
     return parseInt(priceString) / 10**decimals
 }
-
-
-const watchList = [
-        'boredapeyachtclub',
-        'doodles-official',
-        'decentraland',
-        'the-wanderers',
-        'beanzofficial',
-        'mutant-ape-yacht-club',
-        'bored-ape-kennel-club',
-        'cryptopunks',
-        'sandbox',
-        'pudgypenguins',
-        'the-doge-pound',
-        'cyberkongz',
-        'veefriends',
-        'cool-cats-nft',
-        'reptilian-renegade-solana',
-        'galactic-gecko-space-garage',
-        'tamaki-apes',
-        'where-my-vans-go',
-        'portals',
-        'netvrkland',
-        'the-art-of-seasons',
-        'invisiblefriends',
-        'communi3-mad-scientists',
-        'alienfrensnft',
-        'mous-in-da-hous',
-        'forgottenruneswizardscult',
-        'psychedelics-anonymous-genesis'
-    ]
 
 openseaClient.connect();
 
@@ -77,34 +48,35 @@ const getEmoji = (percent)=>{
         r+='🚀' 
     return r
 }
-
+//sendDiscordUpdate('invisiblefriends','Update')
 const itemListListener =  (asset) => {
     openseaClient.onItemListed(asset, (listedItem) => {
         getAssetStats(asset).then( async (collectionStats)=>{
             let weeklyAverage = collectionStats.seven_day_average_price //seven_day_average_price // one_day_average_price
             let listPrice = convertPrice(listedItem.payload.base_price, listedItem.payload.payment_token.decimals)
-            console.log(asset)
+            console.log(asset+'\n')
             let assetCollectionData = await getAssetCollectionData(asset)
             let asset_name = assetCollectionData.name
             let symbol = listedItem.payload.payment_token.symbol
             let link = listedItem.payload.item.permalink
             let percentOff = parseFloat((Math.abs(weeklyAverage-listPrice) / ((weeklyAverage+listPrice) / 2) * 100).toFixed(2))
             let emojis = getEmoji(percentOff)
-            //console.log(`Item from collection #${asset_name} was listed!\n\nPrice: ${parseFloat(listPrice.toFixed(3))} ${symbol}\n\nRarity Score: ${rarity}\n\nThat's ${percentOff}% below the weekly average!\n\n${emojis} ${link}`)
+            
             let blacklisted = blacklist.includes(listedItem.payload.item.nft_id)
-            if(listPrice < weeklyAverage && listedItem.payload.listing_type==="dutch" && percentOff >= 10 && !blacklisted){
+            if(listPrice < weeklyAverage && listedItem.payload.listing_type==="dutch" && percentOff >= 8 && !blacklisted){
                 let rank = ""
                 try{rank = (await getRank(listedItem)).replace('#','')
                 }catch(e){console.log(e)}
                 if (rank!=""){
-                    rank = '\n\n💎'+rank + ' / ' + collectionStats.total_supply
+                    rank = '\n💎 Rarity Rank: '+rank + ' / ' + collectionStats.total_supply
                 }
-                let tweet = `🔥 Deal from collection #${asset_name} was just listed for sale!\n\n💵 Price: ${parseFloat(listPrice.toFixed(3))} ${symbol}${rank}\n\nThat's ${percentOff}% below the weekly average!${hashtags}\n${emojis} ${link}`
+                let tweet = `🔥 JUST LISTED! #${asset_name} \n💵 Price: ${parseFloat(listPrice.toFixed(3))} ${symbol}${rank}\n\nThat's ${percentOff}% below the weekly average!${hashtags}\n${emojis} ${link}`
                 sendTweet(tweet)
+                sendDiscordUpdate(asset,tweet)
                 let fileString = (new Date()).toString()+'\n\n'+tweet+'\n*********************\n'
                 console.log(fileString)
                 //log.write(fileString)
-                blacklist.push("nft_id")
+                blacklist.push(listedItem.payload.item.nft_id)
                 hashtags=''
             }
             console.log(`${asset_name} - ${listPrice}`)
@@ -115,8 +87,8 @@ const itemListListener =  (asset) => {
         })
     })
 }
+
 //setTimeout(()=>getAssetStats(watchList[0]),4100)
-
+const watchList = Object.keys(channelIds)
 watchList.forEach((item)=> itemListListener(item))
-
 

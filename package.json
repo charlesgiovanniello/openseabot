@@ -16,6 +16,7 @@
   "dependencies": {
     "@opensea/stream-js": "^0.0.20",
     "cheerio": "^1.0.0-rc.10",
+    "discord.js": "^13.7.0",
     "dotenv": "^16.0.1",
     "env-cmd": "^10.1.0",
     "express": "^4.18.1",
