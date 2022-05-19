@@ -79,28 +79,28 @@ const getEmoji = (percent)=>{
 }
 
 const itemListListener =  (asset) => {
-    openseaClient.onItemListed(asset, (event) => {
-        getAssetStats(asset).then( async (result)=>{
-            let weeklyAverage = result.seven_day_average_price //seven_day_average_price // one_day_average_price
-            let listPrice = convertPrice(event.payload.base_price, event.payload.payment_token.decimals)
+    openseaClient.onItemListed(asset, (listedItem) => {
+        getAssetStats(asset).then( async (collectionStats)=>{
+            let weeklyAverage = collectionStats.seven_day_average_price //seven_day_average_price // one_day_average_price
+            let listPrice = convertPrice(listedItem.payload.base_price, listedItem.payload.payment_token.decimals)
             console.log(asset)
             let assetCollectionData = await getAssetCollectionData(asset)
             let asset_name = assetCollectionData.name
-            let symbol = event.payload.payment_token.symbol
-            let link = event.payload.item.permalink
+            let symbol = listedItem.payload.payment_token.symbol
+            let link = listedItem.payload.item.permalink
             let percentOff = parseFloat((Math.abs(weeklyAverage-listPrice) / ((weeklyAverage+listPrice) / 2) * 100).toFixed(2))
             let emojis = getEmoji(percentOff)
             //console.log(`Item from collection #${asset_name} was listed!\n\nPrice: ${parseFloat(listPrice.toFixed(3))} ${symbol}\n\nRarity Score: ${rarity}\n\nThat's ${percentOff}% below the weekly average!\n\n${emojis} ${link}`)
-            let blacklisted = blacklist.includes(event.payload.item.nft_id)
-            if(listPrice < weeklyAverage && event.payload.listing_type==="dutch" && percentOff >= 10 && !blacklisted){
+            let blacklisted = blacklist.includes(listedItem.payload.item.nft_id)
+            if(listPrice < weeklyAverage && listedItem.payload.listing_type==="dutch" && percentOff >= 10 && !blacklisted){
                 let rank = ""
-                try{rank = (await getRank(event)).replace('#','')
+                try{rank = (await getRank(listedItem)).replace('#','')
                 }catch(e){console.log(e)}
                 if (rank!=""){
-                    rank = '\n\n💎'+rank + ' / ' + result.total_supply
+                    rank = '\n\n💎'+rank + ' / ' + collectionStats.total_supply
                 }
-                let tweet = `🔥 Deal from collection #${asset_name} was listed!\n\n💵 Price: ${parseFloat(listPrice.toFixed(3))} ${symbol}${rank}\n\nThat's ${percentOff}% below the weekly average!${hashtags}\n${emojis} ${link}`
-                //sendTweet()
+                let tweet = `🔥 Deal from collection #${asset_name} was just listed for sale!\n\n💵 Price: ${parseFloat(listPrice.toFixed(3))} ${symbol}${rank}\n\nThat's ${percentOff}% below the weekly average!${hashtags}\n${emojis} ${link}`
+                sendTweet(tweet)
                 let fileString = (new Date()).toString()+'\n\n'+tweet+'\n*********************\n'
                 console.log(fileString)
                 //log.write(fileString)
@@ -108,7 +108,7 @@ const itemListListener =  (asset) => {
                 hashtags=''
             }
             console.log(`${asset_name} - ${listPrice}`)
-            console.log(event.payload.item.permalink)
+            console.log(listedItem.payload.item.permalink)
             console.log('Blacklisted: ' + blacklisted)
         }).catch((e)=>{
             console.log(e)
