@@ -1,6 +1,8 @@
 const channelIds = {
+    'akutars':'976960954485047326',
     'alienfrensnft':'976839494470873118',
     'the-art-of-seasons':'976839417375358996',
+    'beanzofficial':'976838863039381516',
     'boredapeyachtclub':'976817037848494131',
     'bored-ape-kennel-club':'976838929431019520',
     'cool-cats-nft':'976839206414467192',
@@ -8,10 +10,12 @@ const channelIds = {
     'cyberkongz':'976839066123374632',
     'doodles-official':'976838753094078575',
     'decentraland':'976838785830633562',
+    'deepseajelly':'976961853622198313',
     'the-doge-pound':'976839037400793150',
     'forgottenruneswizardscult':'976839532416757820',
     'galactic-gecko-space-garage':'976839262987251722',
     'invisiblefriends':'976839440360169493',
+    'meebits':'976960541765537845',
     'mutant-ape-yacht-club':'976838896853856286',
     'netvrkland':'976839386685653002',
     'pudgypenguins':'976839002692923453',
@@ -22,7 +26,8 @@ const channelIds = {
     'tamaki-apes':'976839295614738482',
     'veefriends':'976839094862749717',
     'the-wanderers':'976838832400003125',
-    'where-my-vans-go':'976839334487552030'
+    'where-my-vans-go':'976839334487552030',
+    'world-of-women-galaxy':'976961270886596648'
 }
 
 module.exports={
