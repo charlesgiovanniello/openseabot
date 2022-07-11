@@ -10,16 +10,23 @@
     "start": "node src/index.js",
     "dev": "env-cmd -f ./config/keys.env nodemon ./src/index.js"
   },
+  "nodemonConfig": {
+    "ignore": [
+      "./src/blacklist.json"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@opensea/stream-js": "^0.0.20",
+    "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.10",
     "discord.js": "^13.7.0",
     "dotenv": "^16.0.1",
     "env-cmd": "^10.1.0",
     "express": "^4.18.1",
+    "jsonfile": "^6.1.0",
     "nodemon": "^2.0.16",
     "opensea-js": "^3.0.4",
     "puppeteer": "^14.1.0",

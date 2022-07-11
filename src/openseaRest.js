@@ -2,7 +2,9 @@ const { OpenSeaPort, Network } = require('opensea-js')
 const apiKey = process.env.OPENSEA_ACCESS_TOKEN
 const options = {
     method: 'GET',
-    headers: {Accept: 'application/json', 'X-API-KEY': apiKey}
+    headers: {Accept: 'application/json', 'X-API-KEY': apiKey},
+    retries: 2,
+    retryDelay : 4000,
 }
 
 const getAssetStats = async (asset) => {
