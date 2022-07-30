@@ -1,10 +1,10 @@
 const channelIds = {
-    //'akutars':'976960954485047326',
+    'akutars':'976960954485047326',
     'alienfrensnft':'976839494470873118',
     'apesofspace-official':'978815235722981447',
     'aurory':'986373978002169876',
-    //'the-art-of-seasons':'976839417375358996',
-    //'beanzofficial':'976838863039381516',
+    'the-art-of-seasons':'976839417375358996',
+    'beanzofficial':'976838863039381516',
     'boredapeyachtclub':'976817037848494131',
     'bored-ape-kennel-club':'976838929431019520',
     'byopill':'978654780857679882',
@@ -12,7 +12,7 @@ const channelIds = {
     'cryptopunks':'976838959894245416',
     'cyberkongz':'976839066123374632',
     'doodles-official':'976838753094078575',
-    //'decentraland':'976838785830633562',
+    'decentraland':'976838785830633562',
     //'deepseajelly':'976961853622198313',
     //'degentoonz-collection':'978091470823260201',
     'degenerate-ape-academy':'986374063129780255',
@@ -36,14 +36,14 @@ const channelIds = {
     'portals':'976839361440145498',
     'psychedelics-anonymous-genesis':'976839565048434719',
     'reptillian-renegade-solana':'976839235761995796',
-    //'sandbox':'976838980232441876',
+    'sandbox':'976838980232441876',
     'solpunks':'986374153726730250',
     'tamaki-apes':'976839295614738482',
     'veefriends':'976839094862749717',
     'collectvox':'978093436831924234',
     'the-wanderers':'976838832400003125',
     'where-my-vans-go':'976839334487552030',
-    //'world-of-women-galaxy':'976961270886596648'
+    'world-of-women-galaxy':'976961270886596648'
 }
 
 module.exports={
