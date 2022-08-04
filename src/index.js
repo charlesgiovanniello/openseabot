@@ -113,7 +113,11 @@ const itemListListener =  (asset) => {
                     rank = '\n💎 Rarity Rank: '+rank.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' / ' + (collectionStats.total_supply).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 }
                 let tweet = `🔥 JUST LISTED! ${asset_name} \n${rank}\n💵 Price: ${parseFloat(listPrice.toFixed(3))} ${symbol}\n🏴‍☠️ That's ${percentOff}% below the weekly average!\n${hashtags}\n${emojis} ${link}`
-                sendDiscordUpdate(asset,tweet)
+                try{
+                    sendDiscordUpdate(asset,tweet)
+                }catch(e){
+                    console.log(e)
+                }
                 if(rarityPercentile <= 0.3 || percentOff >=35 || symbol=='SOL' /*|| isNaN(rarityPercentile)*/){
                     sendTweet(tweet)
                     blacklist.push(listedItem.payload.item.nft_id)

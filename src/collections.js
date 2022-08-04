@@ -1,16 +1,20 @@
 const channelIds = {
     'akutars':'976960954485047326',
+    'art-blocks-factory':'',
     'alienfrensnft':'976839494470873118',
-    'apesofspace-official':'978815235722981447',
+    //'apesofspace-official':'978815235722981447',
     'aurory':'986373978002169876',
-    'the-art-of-seasons':'976839417375358996',
-    'beanzofficial':'976838863039381516',
+    //'the-art-of-seasons':'976839417375358996',
+    //'beanzofficial':'976838863039381516',
+    'big3-ownership':'',
     'boredapeyachtclub':'976817037848494131',
     'bored-ape-kennel-club':'976838929431019520',
     'byopill':'978654780857679882',
     'cool-cats-nft':'976839206414467192',
     'cryptopunks':'976838959894245416',
     'cyberkongz':'976839066123374632',
+    'chromie-squiggle-by-snowfro':'',
+    'desperate-ape-wives':'',
     'doodles-official':'976838753094078575',
     'decentraland':'976838785830633562',
     //'deepseajelly':'976961853622198313',
@@ -20,6 +24,7 @@ const channelIds = {
     'duskbreakers':'978092357599784980',
     'forgottenruneswizardscult':'976839532416757820',
     'galactic-gecko-space-garage':'976839262987251722',
+    'jaknftartbot':'1004823023209168966',
     'project-hive-avatars':'979448124231811152',
     //'the-long-lost':'978092926955561030',
     'invisiblefriends':'976839440360169493',
@@ -43,7 +48,8 @@ const channelIds = {
     'collectvox':'978093436831924234',
     'the-wanderers':'976838832400003125',
     'where-my-vans-go':'976839334487552030',
-    'world-of-women-galaxy':'976961270886596648'
+    'world-of-women-galaxy':'976961270886596648',
+    'yoloholiday':'1004822642311831582'
 }
 
 module.exports={
