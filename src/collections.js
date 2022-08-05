@@ -49,7 +49,7 @@ const channelIds = {
     'the-wanderers':'976838832400003125',
     'where-my-vans-go':'976839334487552030',
     'world-of-women-galaxy':'976961270886596648',
-    'yoloholiday':'1004822642311831582'
+    //'yoloholiday':'1004822642311831582'
 }
 
 module.exports={
