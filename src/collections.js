@@ -1,5 +1,4 @@
 const channelIds = {
-    'akutars':'976960954485047326',
     'art-blocks-factory':'',
     'alienfrensnft':'976839494470873118',
     //'apesofspace-official':'978815235722981447',
